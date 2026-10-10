@@ -22,12 +22,17 @@ backend/   Go 1.22 + chi + AWS SDK v2  ──►  MiniStack (:4566)
 
 ## Como rodar
 
-```bash
-# emulador + backend (porta 9091)
-cd backend && docker compose up --build
+O backend serve a API em `/api` e o build do frontend a partir de `backend/public/`:
 
-# frontend
-cd frontend && npm install && npm run dev
+```bash
+# 1. emulador AWS (porta 4566)
+cd backend && docker compose up -d ministack
+
+# 2. build do frontend dentro do backend
+cd ../frontend && npm ci && npm run build && cp -r dist ../backend/public
+
+# 3. backend (porta 9091) → abra http://localhost:9091
+cd ../backend && go run ./cmd/server
 ```
 
 Detalhes de cada parte em [`backend/README.md`](backend/README.md) e [`frontend/README.md`](frontend/README.md).
