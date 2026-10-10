@@ -1,0 +1,13 @@
+# estado local do emulador (pode conter nomes de recursos e chaves geradas)
+backend/data/
+# build do frontend servido pelo backend
+backend/public/
+backend/server
+
+node_modules/
+dist/
+.env
+.env.*
+.idea/
+.vscode/
+.DS_Store

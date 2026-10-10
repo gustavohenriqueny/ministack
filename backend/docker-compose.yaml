@@ -1,0 +1,27 @@
+services:
+  backend:
+    container_name: ministack-backend
+    build:
+      context: .
+    ports:
+      - "9091:9091"
+    environment:
+      - PORT=9091
+      - MINISTACK_URL=http://ministack:4566
+    volumes:
+      - ./data:/root/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - ministack
+
+  ministack:
+    container_name: ministack
+    image: ministackorg/ministack:latest
+    ports:
+      - "4566:4566"
+    environment:
+      - DEBUG=1
+      - PERSIST_STATE=1
+      - STATE_DIR=/data/ministack-state
+    volumes:
+      - ./data/ministack:/data
